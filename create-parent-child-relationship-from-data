@@ -1,0 +1,38 @@
+const categories = [
+  { id: "1", name: "fashion", parentId: null },
+  { id: "2", name: "electronics", parentId: null },
+  { id: "3", name: "furniture", parentId: null },
+  { id: "4", name: "toys", parentId: null },
+  { id: "5", name: "kitchen_utensils", parentId: null },
+  { id: "6", name: "stationary", parentId: null },
+
+  { id: "7", name: "men", parentId: "1" }, // child of fashion
+  { id: "8", name: "women", parentId: "1" }, // child of fashion
+
+  { id: "9", name: "charger", parentId: "2" }, // child of electronics
+  { id: "10", name: "phone", parentId: "2" }, // child of electronics
+
+  { id: "11", name: "pressure_cooker", parentId: "5" }, // child of kitchen_utensils
+  { id: "12", name: "blablade", parentId: "4" } // child of toys
+];
+
+
+const categoryMap={}
+
+categories.forEach(category=>{
+    categoryMap[category.id]={...category,children:[]}
+})
+console.log(categoryMap)
+
+
+const primary =[]
+categories.forEach(category=>{
+    if(categoryMap[category.id].parentId){
+        categoryMap[categoryMap[category.id].parentId].children.push(categoryMap[category.id])
+    }else{
+
+        primary.push(categoryMap[category.id])
+    }
+})
+
+console.log(primary)
